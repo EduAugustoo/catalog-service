@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequestMapping("/books")
 @RequiredArgsConstructor
 @RestController
@@ -25,7 +27,7 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> post(@RequestBody Book book) {
+    public ResponseEntity<Book> post(@Valid  @RequestBody Book book) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.bookService.addBookToCatalog(book));
     }
 
@@ -36,7 +38,7 @@ public class BookController {
     }
 
     @PutMapping("/{isbn}")
-    public Book put(@PathVariable String isbn, @RequestBody Book book) {
+    public Book put(@PathVariable String isbn, @Valid @RequestBody Book book) {
         return this.bookService.editBookDetails(isbn, book);
     }
 }
