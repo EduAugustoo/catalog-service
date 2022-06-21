@@ -26,7 +26,7 @@ class CatalogServiceApplicationTests {
     @Test
     void whenGetRequestWithIdThenBookReturned() {
         String bookIsbn = "1231231230";
-        Book bookToCreate = new Book(bookIsbn, "Title", "Author", 9.90);
+        Book bookToCreate = Book.build(bookIsbn, "Title", "Author", 9.90);
         Book expectedBook = webTestClient
                 .post()
                 .uri("/books")
@@ -49,7 +49,7 @@ class CatalogServiceApplicationTests {
 
     @Test
     void whenPostRequestThenBookCreated() {
-        Book expectedBook = new Book("1231231230", "Title", "Author", 9.90);
+        Book expectedBook = Book.build("1231231230", "Title", "Author", 9.90);
 
         webTestClient
                 .post()
@@ -66,7 +66,7 @@ class CatalogServiceApplicationTests {
     @Test
     void whenPutRequestThenBookUpdated() {
         String bookIsbn = "1231231230";
-        Book bookToCreate = new Book(bookIsbn, "Title", "Author", 9.90);
+        Book bookToCreate = Book.build(bookIsbn, "Title", "Author", 9.90);
         Book expectedBook = webTestClient
                 .post()
                 .uri("/books")
@@ -76,7 +76,15 @@ class CatalogServiceApplicationTests {
                 .expectBody(Book.class).value(book -> assertThat(book).isNotNull())
                 .returnResult().getResponseBody();
 
-        Book bookToUpdate = new Book(expectedBook.getIsbn(), expectedBook.getTitle(), expectedBook.getAuthor(), 7.95);
+        Book bookToUpdate = new Book(
+                expectedBook.getId(),
+                expectedBook.getIsbn(),
+                expectedBook.getTitle(),
+                expectedBook.getAuthor(),
+                7.95,
+                expectedBook.getCreatedDate(),
+                expectedBook.getLastModifiedDate(),
+                expectedBook.getVersion());
 
         webTestClient
                 .put()
@@ -93,7 +101,7 @@ class CatalogServiceApplicationTests {
     @Test
     void whenDeleteRequestThenBookDeleted() {
         String bookIsbn = "1231231230";
-        Book bookToCreate = new Book(bookIsbn, "Title", "Author", 9.90);
+        Book bookToCreate = Book.build(bookIsbn, "Title", "Author", 9.90);
         webTestClient
                 .post()
                 .uri("/books")

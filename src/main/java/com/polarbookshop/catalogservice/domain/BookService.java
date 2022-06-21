@@ -37,7 +37,15 @@ public class BookService {
             return addBookToCatalog(book);
         }
 
-        Book bookToUpdate = new Book(existingBook.get().getIsbn(), book.getTitle(), book.getAuthor(), book.getPrice());
+        Book bookToUpdate = new Book(
+                existingBook.get().getId(),
+                existingBook.get().getIsbn(),
+                book.getTitle(),
+                book.getAuthor(),
+                book.getPrice(),
+                existingBook.get().getCreatedDate(),
+                existingBook.get().getLastModifiedDate(),
+                existingBook.get().getVersion());
         return this.bookRepository.save(bookToUpdate);
     }
 }
