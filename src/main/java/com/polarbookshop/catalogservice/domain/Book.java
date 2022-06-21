@@ -34,6 +34,8 @@ public class Book {
     @Positive(message = "The book price must be greater than zero")
     private Double price;
 
+    private String publisher;
+
     @CreatedDate
     private Instant createdDate;
 
@@ -43,7 +45,7 @@ public class Book {
     @Version
     private int version;
 
-    public static Book build(String isbn, String title, String author, Double price) {
-        return new Book(null, isbn, title, author, price, null, null, 0);
+    public static Book build(String isbn, String title, String author, Double price, String publisher) {
+        return new Book(null, isbn, title, author, price, publisher, null, null, 0);
     }
 }
