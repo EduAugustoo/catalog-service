@@ -19,6 +19,9 @@
         <java.version>11</java.version>
         <spring-cloud.version>2021.0.3</spring-cloud.version>
         <test-containers.version>1.16.2</test-containers.version>
+        <docker-registry.username>username</docker-registry.username>
+        <docker-registry.password>password</docker-registry.password>
+        <docker-registry.url>url</docker-registry.url>
     </properties>
 
     <dependencies>
@@ -109,6 +112,18 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <image>
+                        <env>
+                            <BP_JVM_VERSION>11.*</BP_JVM_VERSION>
+                        </env>
+                    </image>
+                    <docker>
+                        <publishRegistry>
+                            <username>${docker-registry.username}</username>
+                            <password>${docker-registry.password}</password>
+                            <url>${docker-registry.url}</url>
+                        </publishRegistry>
+                    </docker>
                     <profiles>
                         <profile>testdata</profile>
                     </profiles>
