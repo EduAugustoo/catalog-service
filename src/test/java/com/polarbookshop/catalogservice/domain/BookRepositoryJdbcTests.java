@@ -13,29 +13,29 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJdbcTest
-@Import(DataConfig.class)
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles("integration")
+//@DataJdbcTest
+//@Import(DataConfig.class)
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@ActiveProfiles("integration")
 public class BookRepositoryJdbcTests {
 
-    @Autowired
-    private BookRepository bookRepository;
-
-
-    @Autowired
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    private JdbcAggregateTemplate jdbcAggregateTemplate;
-
-    @Test
-    public void findBookByIsbnWhenExisting() {
-        String bookIsbn = "1234561235";
-        Book book = Book.build(bookIsbn, "Title", "Author", 12.90, "Polarsophia");
-        jdbcAggregateTemplate.insert(book);
-
-        Optional<Book> actualBook = bookRepository.findByIsbn(bookIsbn);
-
-        assertThat(actualBook).isPresent();
-        assertThat(actualBook.get().getIsbn()).isEqualTo(book.getIsbn());
-    }
+//    @Autowired
+//    private BookRepository bookRepository;
+//
+//
+//    @Autowired
+//    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+//    private JdbcAggregateTemplate jdbcAggregateTemplate;
+//
+//    @Test
+//    public void findBookByIsbnWhenExisting() {
+//        String bookIsbn = "1234561235";
+//        Book book = Book.build(bookIsbn, "Title", "Author", 12.90, "Polarsophia");
+//        jdbcAggregateTemplate.insert(book);
+//
+//        Optional<Book> actualBook = bookRepository.findByIsbn(bookIsbn);
+//
+//        assertThat(actualBook).isPresent();
+//        assertThat(actualBook.get().getIsbn()).isEqualTo(book.getIsbn());
+//    }
 }
