@@ -13,6 +13,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String getGreeting() {
-        return polarProperties.getGreeting();
+        return this.polarProperties.getGreeting();
     }
 }
