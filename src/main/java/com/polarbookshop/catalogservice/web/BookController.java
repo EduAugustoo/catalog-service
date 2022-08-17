@@ -27,7 +27,7 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> post(@Valid  @RequestBody Book book) {
+    public ResponseEntity<Book> post(@Valid @RequestBody Book book) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.bookService.addBookToCatalog(book));
     }
 
