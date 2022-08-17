@@ -14,7 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BookJsonTests {
 
     @Autowired
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private JacksonTester<Book> json;
 
     @Test
