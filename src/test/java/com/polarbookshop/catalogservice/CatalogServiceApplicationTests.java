@@ -181,6 +181,8 @@ class CatalogServiceApplicationTests {
                 expectedBook.getPublisher(),
                 expectedBook.getCreatedDate(),
                 expectedBook.getLastModifiedDate(),
+                expectedBook.getCreatedBy(),
+                expectedBook.getLastModifiedBy(),
                 expectedBook.getVersion());
 
         webTestClient
@@ -219,6 +221,8 @@ class CatalogServiceApplicationTests {
                 expectedBook.getPublisher(),
                 expectedBook.getCreatedDate(),
                 expectedBook.getLastModifiedDate(),
+                expectedBook.getCreatedBy(),
+                expectedBook.getLastModifiedBy(),
                 expectedBook.getVersion());
 
         webTestClient
@@ -253,6 +257,8 @@ class CatalogServiceApplicationTests {
                 expectedBook.getPublisher(),
                 expectedBook.getCreatedDate(),
                 expectedBook.getLastModifiedDate(),
+                expectedBook.getCreatedBy(),
+                expectedBook.getLastModifiedBy(),
                 expectedBook.getVersion());
 
         webTestClient
