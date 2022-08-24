@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,6 +23,9 @@ public class BookController {
 
     @GetMapping
     public Iterable<Book> get() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var auth = (JwtAuthenticationToken) authentication;
+        log.info(auth.getToken().getTokenValue());
         log.info("Fetching the list of books in the catalog");
         return this.bookService.viewBookList();
     }
