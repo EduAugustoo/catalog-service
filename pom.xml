@@ -20,6 +20,7 @@
         <spring-cloud.version>2021.0.3</spring-cloud.version>
         <test-containers.version>1.16.2</test-containers.version>
         <test-keycloak.version>2.1.2</test-keycloak.version>
+        <otel.version>1.12.1</otel.version>
         <docker-registry.username>username</docker-registry.username>
         <docker-registry.password>password</docker-registry.password>
         <docker-registry.url>url</docker-registry.url>
@@ -82,6 +83,12 @@
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry.javaagent</groupId>
+            <artifactId>opentelemetry-javaagent</artifactId>
+            <version>${otel.version}</version>
             <scope>runtime</scope>
         </dependency>
 
