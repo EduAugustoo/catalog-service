@@ -4,7 +4,7 @@ on: push
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: eduaugustoo/catalog-service
-  VERSION: ${{github.sha}}
+  VERSION: ${{ github.sha }}
 
 jobs:
   build:
@@ -91,8 +91,10 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
       - name: Publish container image
-        run: docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:${{env.VERSION}}
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
       - name: Publish container image (latest)
         run: |
-          docker tag ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:${{env.VERSION}} ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:latest
-          docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:latest
+          docker tag \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }} \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
