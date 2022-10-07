@@ -152,7 +152,7 @@
                 </executions>
                 <configuration>
                     <image>
-                        <name>${project.artifactId}</name>
+                        <name>${project.name}</name>
                         <env>
                             <BP_JVM_VERSION>11.*</BP_JVM_VERSION>
                         </env>
