@@ -16,6 +16,7 @@
     <packaging>jar</packaging>
 
     <properties>
+        <imageName>${project.artifactId}:${project.version}</imageName>
         <java.version>11</java.version>
         <spring-cloud.version>2021.0.3</spring-cloud.version>
         <test-containers.version>1.16.2</test-containers.version>
@@ -152,7 +153,7 @@
                 </executions>
                 <configuration>
                     <image>
-                        <name>${project.name}</name>
+                        <name>${imageName}</name>
                         <env>
                             <BP_JVM_VERSION>11.*</BP_JVM_VERSION>
                         </env>
