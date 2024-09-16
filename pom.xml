@@ -15,9 +15,13 @@
     <name>catalog-service</name>
     <description>catalog-service</description>
     <properties>
+        <imageName>${project.artifactId}</imageName>
         <java.version>17</java.version>
         <spring-cloud.version>2023.0.2</spring-cloud.version>
         <testcontainers.version>1.17.3</testcontainers.version>
+        <docker-registry.username>username</docker-registry.username>
+        <docker-registry.password>password</docker-registry.password>
+        <docker-registry.url>url</docker-registry.url>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -32,6 +36,7 @@
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
                 <version>${testcontainers.version}</version>
+                <type>pom</type>
                 <scope>import</scope>
             </dependency>
         </dependencies>
@@ -99,17 +104,32 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <profiles>
-                        <profile>testdata</profile>
-                    </profiles>
-                </configuration>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <image>
+                            <name>${imageName}</name>
+                            <env>
+                                <BP_JVM_VERSION>17.*</BP_JVM_VERSION>
+                            </env>
+                        </image>
+                        <docker>
+                            <publishRegistry>
+                                <username>${docker-registry.username}</username>
+                                <password>${docker-registry.password}</password>
+                                <url>${docker-registry.url}</url>
+                            </publishRegistry>
+                        </docker>
+                        <profiles>
+                            <profile>testdata</profile>
+                        </profiles>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>
