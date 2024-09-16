@@ -54,11 +54,11 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-          cache: gradle
+          cache: maven
       - name: Build container image
         run: |
-          chmod +x gradlew
-          ./gradlew bootBuildImage --imageName ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          chmod +x mvnw
+          ./mvnw spring-boot:build-image -DskipTests ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
       - name: OCI image vulnerability scanning
         uses: anchore/scan-action@v3
         id: scan
