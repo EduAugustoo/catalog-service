@@ -39,7 +39,7 @@ jobs:
           ./mvnw install
   package:
     name: Package and Publish
-    if: ${{github.ref == 'refs/heads/main'}}
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ build ]
     runs-on: ubuntu-22.04
     permissions:
@@ -58,7 +58,7 @@ jobs:
       - name: Build container image
         run: |
           chmod +x mvnw
-          ./mvnw spring-boot:build-image -DskipTests ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          ./mvnw spring-boot:build-image -DskipTests "-DimageName=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}"
       - name: OCI image vulnerability scanning
         uses: anchore/scan-action@v3
         id: scan
@@ -68,7 +68,7 @@ jobs:
           severity-cutoff: high
           acs-report-enable: true
       - name: Upload vulnerability report
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: success() || failure()
         with:
           sarif_file: ${{steps.scan.outputs.sarif}}
